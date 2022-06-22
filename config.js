@@ -1,6 +1,6 @@
 //=============『 Utama 』================== //
 global.owner = ['6285779150501'] 
-global.mods = [] 
+global.mods = ['6285779150501] 
 global.prems = [] 
 
 //=============『 Info Owner 』============== //
@@ -37,7 +37,7 @@ global.benar = 'Benar ✅\n'
 global.salah = 'Salah ❌\n'
 global.stiker_wait = 'Stiker sedang dibuat'
 global.packname = '2022'
-global.author = '© Hyzer Official'
+global.author = '© Rangga Official'
 
 //=============『 Apikey 』================== //
 global.APIs = { // API Prefix
