@@ -1,21 +1,26 @@
-let handler = async (m, { conn, isROwner, text }) => {
-    const delay = time => new Promise(res => setTimeout(res, time))
-    let getGroups = await conn.groupFetchAllParticipating()
-    let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
-    let anu = groups.map(v => v.id)
-    var pesan = m.quoted && m.quoted.text ? m.quoted.text : text
-    if(!pesan) throw 'teksnya?'
-    m.reply(`Mengirim Broadcast Ke ${anu.length} Chat, Waktu Selesai ${anu.length * 0.5 } detik`)
-    for (let i of anu) {
-    await delay(500)
-    conn.sendBut(i, `${pesan}`, wm, 'OWNER', '.owner', null).catch(_ => _)
-    }
-  m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
+// all chats ke broadcast
+let handler  = async (m, { conn, text }) => {
+  let chats = Object.keys(await conn.chats)
+  conn.reply(m.chat, `_Mengirim pesan broadcast ke ${chats.length} chat_`, m)
+  for (let id of chats) {
+       let bcbg = 'https://telegra.ph/file/b2ae8a0e437e4252d5124.png'
+       await conn.delay(1500)
+       await conn.send2ButtonImg(id, bcbg, text.trim(), wm, 'Menu', '.menu', 'Owner', '.owner', ftroli)
+     }
+  m.reply('*Broadcast selesai*')
 }
-handler.help = ['bcgcbot <teks>']
+handler.help = ['broadcast','bc'].map(v => v + ' <teks>')
 handler.tags = ['owner']
-handler.command = /^((broadcastgc|bcgc)bot)$/i
-
+handler.command = /^(broadcast|bc)$/i
 handler.owner = true
+handler.mods = false
+handler.premium = false
+handler.group = false
+handler.private = false
+
+handler.admin = false
+handler.botAdmin = false
+
+handler.fail = null
 
 module.exports = handler
